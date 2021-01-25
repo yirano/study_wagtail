@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{# Note how we're importing the wagtailimages_tags library here #}
+{% load wagtailcore_tags wagtailimages_tags %} 
 
 {% block body_class %}template-blogpage{% endblock %}
 
@@ -12,5 +13,15 @@
 
     {{ page.body|richtext }}
 
+    {% for item in page.gallery_images.all %}
+        <div style="float: left; margin: 10px">
+
+            {# The fill-320x240 resizes and crops the image to fill a 320x240 rectagnel #}
+            {% image item.image fill-320x240 %}
+            <p>{{ item.caption }}</p>
+        </div>
+    {% endfor %}
+
+    {# The "get_parent.url" is the parent url to this child page --> which is the blog_index_page.html #}
     <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
 {% endblock %}
