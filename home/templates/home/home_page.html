@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+<!-- Wagtail provides a number of template tags & filters which can be loaded by including this at the top of the file 
+    You'll have to include this in each template that uses Wagtail's tags or Django will throw a TemplateSyntaxError
+-->
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+    <!-- The richtext filter prints the text as opposed to the HTML tags/format on the page -->
+    {{ page.body|richtext }}
+{% endblock %}
