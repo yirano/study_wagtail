@@ -8,7 +8,7 @@
     <h1>{{ page.title }}</h1>
     <div class="intro">{{ page.intro|richtext }}</div>
 
-    {% for post in bloggers %}
+    {% for post in blogpages %}
         {% with post=post.specific %} <!-- This is kind of like destructuring an object in JS -->
             <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>  <!-- Note the pageurl tag, it is similar to the Django's url tag, but takes a Wagtail Page object as an argument -->
             {{ post.intro }}

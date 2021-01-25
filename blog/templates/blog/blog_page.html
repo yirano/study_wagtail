@@ -16,11 +16,20 @@
     {% for item in page.gallery_images.all %}
         <div style="float: left; margin: 10px">
 
-            {# The fill-320x240 resizes and crops the image to fill a 320x240 rectagnel #}
+            {# The fill-320x240 resizes and crops the image to fill a 320x240 rectangle #}
             {% image item.image fill-320x240 %}
             <p>{{ item.caption }}</p>
         </div>
     {% endfor %}
+
+    {% if page.tags.all.count %}
+        <div class="tags">
+            <h3>Tags</h3>
+            {% for tag in page.tags.all %}
+                <a href="{% slugurl 'cats' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a> <!-- The slugurl works like a pageurl, but the slugurl takes a Page slug from the Promote tab as an argument. -->
+            {% endfor %}
+        </div>
+    {% endif %}
 
     {# The "get_parent.url" is the parent url to this child page --> which is the blog_index_page.html #}
     <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
