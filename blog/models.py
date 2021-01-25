@@ -55,10 +55,10 @@ class BlogPageGalleryImage(Orderable):
     '''
     images is a ForeignKey to Wagtail's build-in Image model, where the images themselves are stored. This comes with a dedicated panel type, ImageChooserPanel, which provides a pop-up interface for choosing an existing image or uploading a new one. This way, we allow an image to exist in multiple galleries - effectively, we've created a many-to-many relationship between pages and images.
     '''
+    '''
+    Specifying on_delete=models.CASCADE on the foreigm key means that if the image is deleted from the system, the gallery entry is deleted as well. If we want to leave the entry in place, we'd set the foreign key diff -- on_delete=models.SET_NULL
+    '''
     image = models.ForeignKey(
-        '''
-        Specifying on_delete=models.CASCADE on the foreigm key means that if the image is deleted from the system, the gallery entry is deleted as well. If we want to leave the entry in place, we'd set the foreign key diff -- on_delete=models.SET_NULL
-        '''
         'wagtailimages.Image', on_delete=models.CASCADE, related_name="+"
     )
     caption = models.CharField(blank=True, max_length=250)
